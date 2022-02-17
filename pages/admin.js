@@ -43,6 +43,9 @@ const Admin = () =>
         <ClienteModal mostrar={mostrarModal} ocultar={onModalClose}
             onGuardarCliente={guardarClienteHandler}
             onFiltrar={filtrarCliente}/>
+            <div>
+            <a href="/" className="btn btn-danger mb-4 mt-2">Cerrar sesión</a>
+        </div>
     </div>
 }
 export default Admin

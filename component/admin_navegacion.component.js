@@ -97,7 +97,7 @@ const Navegacion = (props) =>
                 }
             </tbody>
         </table>
-
+        
     </div>
 }
 export default Navegacion
