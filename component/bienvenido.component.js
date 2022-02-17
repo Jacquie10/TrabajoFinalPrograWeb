@@ -110,7 +110,7 @@ const Bienvenido = (props) =>
 
                     <div className="row mt-4">
                         <div className="col-md-2">
-                            <label htmlFor="">Recibirás BTC</label>
+                            <label htmlFor="">Recibirás PEN</label>
                         </div>
                         <div className="col-md-2">
                             <input className="form-control mb-4" id="recibiras" defaultValue="0.00" type="text"  />
@@ -190,7 +190,7 @@ const Bienvenido = (props) =>
 
                     <div className="row mt-4">
                         <div className="col-md-2">
-                            <label htmlFor="">Enviarás BTC</label>
+                            <label htmlFor="">Enviarás PEN</label>
                         </div>
                         <div className="col-md-2">
                             <input className="form-control mb-4" id="enviaras" defaultValue="0.00"  type="text" />

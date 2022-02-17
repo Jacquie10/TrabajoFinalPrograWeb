@@ -16,9 +16,14 @@ const Paso2C = (props) => {
         <form>
             <div className="mt-4">
                 <label for="txt_cuent" className="form-label">Numero de Cuenta Bancaria de la pagina:</label>
-                <input id="txt_cuenta" type="text" className="form-control" />
+                <div class="card">
+                    <div class="card-body">
+                    <label for="txt_cuent" className="form-label">202021568465416351</label>
+                    </div>
+                </div>
             </div>
-        </form> 
+        </form>
+
 
         <div className="mt-4">
             <button type="button" className="btn btn-primary mt-4" onClick={butConfirmar} >
