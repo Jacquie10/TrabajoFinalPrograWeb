@@ -8,20 +8,20 @@ const RegistroUsuario2 = () =>
                     <h3>Paso 2</h3>
                     <form>
                         <div>
-                            <label for="txt_correo" className="form-label">Correo Electronico</label>
+                            <label htmlFor="txt_correo" className="form-label">Correo Electronico</label>
                             <input id="txt_correo" type="email" className="form-control" />
                         </div>
                         <div className="mb-2">
-                            <label for="txt_password" className="form-label">Contraseña</label>
+                            <label htmlFor="txt_password" className="form-label">Contraseña</label>
                             <input id="txt_password" type="password" className="form-control" />
                         </div>
                         <div className="mb-2">
-                            <label for="txt_password" className="form-label">Repetir Contraseña</label>
+                            <label htmlFor="txt_password" className="form-label">Repetir Contraseña</label>
                             <input id="txt_password" type="password" className="form-control" />
                         </div>
                         <div className="mb-2">
-                            <label for="txt_password" className="form-label">Numero Telefonico</label>
-                            <input id="txt_password" type="password" className="form-control" />
+                            <label htmlFor="txt_telefono" className="form-label">Numero Telefonico</label>
+                            <input id="txt_telefono" type="text" className="form-control" />
                         </div>
 
                         <div className="row">
