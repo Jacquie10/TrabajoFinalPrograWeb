@@ -6,6 +6,8 @@ const Bienvenido = (props) =>
     const [solicitarVenta, setSolicitarVenta] = useState(true)
     const [mostrarEditar, setMostrarEditar] = useState(false)
 
+    const [txtMonto, settxtMonto] = useState('')
+    const [txtCambio, settxtCambio] = useState('')
    
 
     const butVentaDolar = () =>
@@ -32,10 +34,17 @@ const Bienvenido = (props) =>
     
     const txtOnChangeMonto = (event) =>
     {
-        setMonto(event.target.value)
-        console.log(event.target.value)
+        const Monto = event.target.value
+        settxtMonto(Monto)
+        console.log(Monto)
     }
 
+
+    const calcular = () =>{
+       
+        const valor = document.getElementById("cambioId")
+        console.log(valor)
+    }
 
 
 
@@ -45,7 +54,6 @@ const Bienvenido = (props) =>
     {
 
         return <div>
-            <h1 className="mt-4">¡Bienvenid@!</h1>
             <div className="row">
                 <div className="col-sm-4 mt-4">
                     <h5>
@@ -104,7 +112,7 @@ const Bienvenido = (props) =>
                             <label htmlFor="">Tipo de Cambio</label>
                         </div>
                         <div className="col">
-                            <h4 id="IDcambioVenta">166,934.69</h4>
+                            <h4 id="cambioId" >166,934.69</h4>
                         </div>
                     </div>
 
@@ -113,13 +121,27 @@ const Bienvenido = (props) =>
                             <label htmlFor="">Recibirás PEN</label>
                         </div>
                         <div className="col-md-2">
+                            
+                                <div class="card">
+                                    <div class="card-body">
+                                        <label for="txt_cuent" className="form-label">550</label>
+                                    </div>
+                                </div>
+                            
                             <input className="form-control mb-4" id="recibiras" defaultValue="0.00" type="text"  />
                         </div>
                     </div>
 
                     <div>
+                        <button type="button" className="btn btn-info md-4"
+                                    onClick={calcular}  >Calcular</button>
+                    </div>
+
+                    <div>
                         <a href="/Pasos/pasoVenta" className="btn btn-success mb-4" >Solicitar venta</a>
                     </div>
+
+                    
                 </div>
             </div>
             <div>
@@ -131,7 +153,6 @@ const Bienvenido = (props) =>
     {
         {/* MOSTRAR TIPO DE CAMBIO COMPRA*/ }
         return <div>
-            <h1 className="mt-4">¡Bienvenid@!</h1>
             <div className="row">
                 <div className="col-sm-4 mt-4">
                     <h5>
@@ -184,7 +205,7 @@ const Bienvenido = (props) =>
                             <label htmlFor="">Tipo de Cambio</label>
                         </div>
                         <div className="col">
-                            <h4 id="IDcambioCompra" >168,770.37</h4>
+                            <h4 id="cambioId" >168,770.37</h4>
                         </div>
                     </div>
 
@@ -198,8 +219,19 @@ const Bienvenido = (props) =>
                     </div>
 
                     <div>
-                        <a href="/Pasos/pasoCompra" className="btn btn-success mb-4">Solicitar compra</a>
+                        <a href="/Pasos/pasoCompra" className="btn btn-success mb-4">Solicitar Compra</a>
+
                     </div>
+
+                    <div>
+                        <button type="button" className="btn btn-info md-4"
+                                    onClick={calcular}  >Calcular</button>
+                    </div>
+
+
+
+
+                   
                 </div>
             </div>
             <div>
