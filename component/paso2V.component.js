@@ -5,9 +5,9 @@ const Paso2V = (props) => {
     }
     return <div>
         <h1 className="txt-center">Paso 2 de 3</h1>
-        <h5> Confirmacion de Venta </h5>
+        <h5 className="alert alert-warning mt-4"> Confirmacion de Venta </h5>
 
-        <h5 className="mt-4">Numero de Operacion: 15</h5>
+        <h5 className="mt-4">Numero de Operacion: 14</h5>
         
         <form>
             <div className="row mt-4">
@@ -15,7 +15,7 @@ const Paso2V = (props) => {
                       <label for="" className="form-label">Direccion de la billetera de la pagina:    </label>
                 </div>
                 <div className="col">
-                    <a href="/" className="btn btn-link">Direccion billetera</a>
+                    <p>123456788901927</p>
                 </div>
              
             </div>
@@ -47,10 +47,11 @@ const Paso2V = (props) => {
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
-                        N° 20183849
+                        <label>Ingrese el número de transaccion</label>
+                        <input className="form-control mt-2"></input>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
                     </div>
                 </div>
             </div>

@@ -1,12 +1,18 @@
-const Paso3V = () => {
+const Paso3V = (props) => {
+    const butConfirmar= () =>{
+        props.confirmar()
+    }
+
     return <div>
 
         <h1>Paso 3 de 3</h1>
         <h5> Espere un momento</h5>  
 
-        <label>Numero de operacion:  16 </label>  
+        <label>Numero de operacion:  14 </label>  
         <div className="mt-4">
-            <a href="/main" className="btn btn-primary btn-lg " role="button" >Finalizar</a>
+            <button type="button" className="btn btn-primary mt-4" onClick={butConfirmar} >
+                        Confirmar
+            </button>
         </div>
 
     </div>

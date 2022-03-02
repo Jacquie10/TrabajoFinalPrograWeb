@@ -16,10 +16,10 @@ const Paso1C = (props) => {
         <body className="container">
             <h1>Paso 1 de 3</h1>  
 
-            <h5 className="mt-4">Numero de Operacion: 22</h5>
-
             <div id="compra">
-                <h5>Solicitud de Compra</h5>
+                <h5 className="alert alert-warning mt-4">Solicitud de Compra</h5>
+                <h5 className="alert alert-info mt-4">Numero de Operacion: 22</h5>
+
                 <form>
                     <div>
                         <label htmlFor="txt_cuent" className="form-label">Dirección de billetera:</label>

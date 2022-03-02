@@ -29,23 +29,19 @@ const Paso1V = (props) => {
     return <body class="container">
         <h1>Paso 1 de 3</h1>
         <div id="venta">
-            <h5>Solicitud de Venta</h5>
+            <h5 className="alert alert-warning mt-4">Solicitud de Venta</h5>
 
-            <h5 className="mt-4">Numero de Operacion: 14</h5>
+            <h5 className="alert alert-info mt-4">Numero de Operacion: 14</h5>
 
 
             <form>
                 <div className="mt-4">
                     <label for="txt_cuent" className="form-label">Numero de Cuenta Bancaria:</label>
                     <input id="txt_cuenta" type="text" className="form-control" onChange={txtcuentaOnChange} />
-                    <div className="form-text">Solo se acepta BCP</div>
+                    <div className="alert alert-danger mt-4">Solo se acepta BCP</div>
                 </div>
             </form>
         </div>
-
-
- 
-
 
 
         <div className="mt-4">
