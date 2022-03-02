@@ -37,6 +37,7 @@ const Bienvenido = (props) =>
         const Monto = event.target.value
         settxtMonto(Monto)
         console.log(Monto)
+        
     }
 
 
@@ -44,6 +45,8 @@ const Bienvenido = (props) =>
        
         const valor = document.getElementById("cambioId")
         console.log(valor)
+
+
     }
 
 
