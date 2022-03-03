@@ -1,16 +1,24 @@
+import { useState } from "react"
 
 const AdminListaOperaciones = (props) =>
 {
+    const [valor,setValor] = useState(0)
+    const [suma,setSuma] = useState(0)
+
+    const sumarMonto= ()=>{
+    
+    }
     return <div>
         <div className="row mt-4">
             <div className="col mt-2">
                   <h3>Lista de Operaciones</h3>
             </div>
             <div className="col mt-2">
-                 <h5>  Monto total Operado: 1 721 626 Bitc</h5>
+                 <h5>  Monto total Operado:{valor} 1 721 626 Bitc</h5>
+
             </div>
         </div>
-
+  
         
        
     <table className="table mt-4">
