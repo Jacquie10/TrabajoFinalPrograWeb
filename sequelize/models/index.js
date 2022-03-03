@@ -8,6 +8,7 @@ const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
+
 let sequelize;
 if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
@@ -30,6 +31,11 @@ fs
 
   const modelCliente = require("../models/operacion")
   db[modelCliente(sequelize, Sequelize.DataTypes).name] = modelCliente(sequelize, Sequelize.DataTypes);
+
+  const modelData = require("../models/operacion")
+  db[modelData(sequelize, Sequelize.DataTypes).name] = modelData(sequelize, Sequelize.DataTypes);
+
+
 
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
