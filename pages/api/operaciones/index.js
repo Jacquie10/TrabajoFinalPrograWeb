@@ -1,4 +1,4 @@
-import { guardarOperacion, modificarOperacion, obtenerOperacion, obtenerOperaciones } from "../../../dao/operaciones"
+import { guardarOperacion, modificarOperacion, obtenerOperaciones } from "../../../dao/operaciones"
 
 const operacionesHandler = async (req, res) =>{
     if (req.method == "GET") {

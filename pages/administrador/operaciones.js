@@ -12,7 +12,6 @@ const Operaciones = () =>
 
     const obtenerOperacionHTTP= async () => {
         const response = await fetch("/api/operaciones")
-        
         const data = await response.json()
         console.log(data)
         return data
@@ -61,7 +60,7 @@ const Operaciones = () =>
     }
     const editarOperacionHandler = async (id) =>{
         //abrir el modal cuando se aprete editar
-        const resp = await fetch(`/api/operaciones/${id}` )
+        const resp = await fetch(`/api/operaciones/${id}`)
         const data = await resp.json()
         setOperacion(data.operacion) 
         setModoFormulario("edicion")
@@ -99,13 +98,13 @@ const Operaciones = () =>
 
 
     return <div>
-        <AdminListaOperaciones  operaciones={listadoOperaciones} 
+        <AdminListaOperaciones   operaciones = {listadoOperaciones} 
             onEditarOperacion={editarOperacionHandler}/>
         <OperacionModal mostrar={debeMostarModal} 
             modo = {modoFormulario}
             ocultar={ModalClose}  
             onGuardarOperacion={guardarOperacionHandler} 
-            onActualizarOperacionHandler = {actualizarOperacionHandler}
+            onActualizarOpercionHandler = {actualizarOperacionHandler}
             operacion = {operacion}/>
         <button className="mt-4"  onClick={abrirSolicitud}>Nuevo </button>    
     </div>
