@@ -40,64 +40,7 @@ const Navegacion = (props) =>
                 </form>
             </div>
         </nav>
-
-        <table className="table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombres Completos</th>
-                    <th>DNI</th>
-                    <th>Correo</th>
-                    <th>Telefono</th>
-                    <th>Opciones</th>
-                    <th>Estado</th>
-                </tr>
-            </thead>
-            <tbody>
-                {
-                    // Map -> Pinta en cada columna
-                    props.clientes.map((cliente) => {
-                        return <tr key={cliente.id}>
-                            <td>{cliente.id}</td>
-                            <td>{cliente.nombreCompleto}</td>
-                            <td>{cliente.DNI}</td>
-                            <td>{cliente.correo}</td>
-                            <td>{cliente.telefono}</td>
-                            <td>
-                                {
-                                    <button className="btn btn-link"
-                                        onClick={() => {
-                                            // Llama a la funcion del padre
-                                            props.onEditarCliente(cliente)
-                                        }}>
-                                        Editar
-                                    </button>
-                                }
-                            </td>
-                            <td>
-                                {
-                                    <div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
-                                                <label class="form-check-label" for="flexRadioDefault1">
-                                                    Pendiente
-                                                </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
-                                                <label class="form-check-label" for="flexRadioDefault2">
-                                                    Validado
-                                                </label>
-                                        </div>
-                                    </div>
-                                }
-                            </td>
-                        </tr>
-                    })
-                }
-            </tbody>
-        </table>
-        
+    
     </div>
 }
 export default Navegacion
