@@ -44,7 +44,7 @@ const obtenerOperacion = async (id) =>{
 
 const modificarOperacion = async (operacion) =>{
     //obtener el proyecto que esta en la base de bd
-    const operacionModificar = await obtenerSolicitud(operacion.id)
+    const operacionModificar = await obtenerOperacion(operacion.id)
     //modificar los campos
     operacionModificar.fecha = operacion.fecha
     operacionModificar.tipoOperacion = operacion.tipoOperacion

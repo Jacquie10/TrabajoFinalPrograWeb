@@ -17,7 +17,6 @@ const AdminListaOperaciones = (props) =>
        <thead>
            <tr>
                <th>Fecha</th>
-               
                <th>Tipo de Operacion</th>
                <th>Tipo de Cambio</th>
                <th>Monto BTC</th>
@@ -36,8 +35,6 @@ const AdminListaOperaciones = (props) =>
                        <td>{operacion.montoFinal}</td>
                        <td>{operacion.estado}</td>
                        <td>{operacion.cliente}</td>
-
-
                        <td>
                            {
                                <button className="btn btn-link" onClick={() => {

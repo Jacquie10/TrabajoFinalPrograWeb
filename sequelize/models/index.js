@@ -28,6 +28,9 @@ fs
   const model = require("../models/operacion")
   db[model(sequelize, Sequelize.DataTypes).name] = model(sequelize, Sequelize.DataTypes);
 
+  const modelCliente = require("../models/operacion")
+  db[modelCliente(sequelize, Sequelize.DataTypes).name] = modelCliente(sequelize, Sequelize.DataTypes);
+
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
