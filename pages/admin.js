@@ -1,51 +1,124 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Navegacion from "../component/admin_navegacion.component"
-import { editarCliente, guardarCliente } from "../dao/funciones"
-import ClienteModal from "../component/modal_admin.component"
+import AdminListaClientes from "../component/clientes_listaClientes.component"
+import ClienteModal from "../component/clientesModal.component"
 
 const Admin = () =>
 {
-    const listaClientes = 
-    [
-        {id : "1", nombreCompleto : "Billy", DNI : "9173521", correo : "billy@hotmail", telefono : "99882627"},
-        {id : "2", nombreCompleto : "Andra", DNI : "467423", correo : "andra@hotmail", telefono : "9636313"},
-        {id : "3", nombreCompleto : "Hernan", DNI : "121324", correo : "hernan@hotmail", telefono : "81761528"}
-    ]
+    const [debeMostarModal, setdebeMostarModal] = useState(false)
+    const [modoFormulario, setModoFormulario] = useState("nuevo")
+    const [listadoClientes, setListadoClientes] = useState([])
+    const [cliente, setCliente] = useState(null)
 
-    const [mostrarModal, setMostrarModal] = useState(false)
 
-    const onModalClose = () =>
+    const obtenerClienteHTTP= async () => {
+        const response = await fetch("/api/clientes")
+        
+        const data = await response.json()
+        console.log(data)
+        return data
+    }
+    useEffect( async () => {
+        //hacemos una peticion al backend
+        const data = await obtenerClienteHTTP()
+        setListadoClientes(data.clientes)
+
+    }, [])   
+
+
+    const guardarClienteHandler = async (dni, nombre, apellido,correo, password,telefono,estado) =>
     {
-        setMostrarModal(false)
+        const cliente = {
+            dni:dni,
+            nombre:nombre,
+            apellido:apellido,
+            correo:correo,
+            password:password,
+            telefono:telefono,
+            estado:estado   
+        }
+
+
+        const resp = await fetch("/api/clientes", {
+            method: "POST",
+            body:JSON.stringify(cliente)
+        } )
+        const data = await resp.json()
+        if(data.msg == ""){
+            setdebeMostarModal(false)
+            const dataClientes = await obtenerClienteHTTP()
+            setListadoClientes(dataClientes.clientes)
+            
+        }
+       
+    }
+    const ModalClose = () =>
+    {
+        setdebeMostarModal(false)
     }
 
-    const editarClienteHandler = (cliente) =>
-    {
-        editarCliente(cliente)
-        setMostrarModal(true)
+    const abrirSolicitud = () => {
+        setModoFormulario("nuevo")
+        setdebeMostarModal(true)
     }
+    const editarClienteHandler = async (id) =>{
+        //abrir el modal cuando se aprete editar
+        const resp = await fetch(`/api/clientes/${id}` )
+        const data = await resp.json()
+        setCliente(data.cliente) 
+        setModoFormulario("edicion")
+        setdebeMostarModal(true)
+       
+    }
+    
+    //------------------------------------------------------------------------
+    const  actualizarClienteHandler  =  async  (id,dni, nombre, apellido,correo, password ,telefono,estado)  =>  {
+        
+        const cliente = {
+            id:id,
+            dni: dni,
+            nombre:nombre,
+            apellido:apellido,
+            correo:correo,
+            password:password,
+            telefono:telefono ,
+            estado:estado,
+        }
 
-    const guardarClienteHandler = (id, nombreCompleto, DNI, correo, telefono) =>
-    {
-        guardarCliente(id, nombreCompleto, DNI, correo, telefono)
-        // location.reload(): recarga la pagina
-        // Una vez guardado, cerrar el modal
-        setMostrarModal(false)
-    }
+        // peticion a backend para agregar un nuevo proyecto
+        const  resp  =  await  fetch("/api/clientes" ,  {
+            method : "PUT" ,
+            body : JSON.stringify(cliente)
+        } )
+        const  data  =  await  resp.json()
 
-    const filtrarCliente = (palabra) =>
-    {
-        console.log(palabra)
+        if  ( data.msg  ==  "" )  {
+            setdebeMostarModal(false)
+            const dataCliente = await obtenerClienteHTTP()
+            setListadoClientes(dataCliente.cliente)
+        }
     }
+    //--------------------------------------------------------------------------
+
 
     return <div>
-        <Navegacion clientes={listaClientes} onEditarCliente={editarClienteHandler}/>
-        <ClienteModal mostrar={mostrarModal} ocultar={onModalClose}
-            onGuardarCliente={guardarClienteHandler}
-            onFiltrar={filtrarCliente}/>
-            <div>
+        <Navegacion/>
+        <AdminListaClientes  clientes={listadoClientes} 
+            onEditarCliente={editarClienteHandler}/>
+        <ClienteModal mostrar={debeMostarModal} 
+            modo = {modoFormulario}
+            ocultar={ModalClose}  
+            onGuardarCliente={guardarClienteHandler} 
+            onActualizarClienteHandler = {actualizarClienteHandler}
+            cliente = {cliente}/>
+        <button className="mt-4"  onClick={abrirSolicitud}>Nuevo </button> 
+        <div>
             <a href="/" className="btn btn-danger mb-4 mt-2">Cerrar sesión</a>
-        </div>
+        </div>   
     </div>
+
+
+
 }
+
 export default Admin
