@@ -1,3 +1,4 @@
+
 const AdminListaOperaciones = (props) =>
 {
     return <div>
@@ -15,13 +16,13 @@ const AdminListaOperaciones = (props) =>
     <table className="table mt-4">
        <thead>
            <tr>
-               <th>ID</th>
                <th>Fecha</th>
-               <th>Hora</th>
-               <th>Cliente</th>
+               
                <th>Tipo de Operacion</th>
                <th>Tipo de Cambio</th>
                <th>Monto BTC</th>
+               <th>Estado</th>
+               <th>Cliente</th>
            </tr>
        </thead>
        <tbody>
@@ -29,41 +30,25 @@ const AdminListaOperaciones = (props) =>
                // Map -> Pinta en cada columna
                props.operaciones.map((operacion) => {
                    return <tr key={operacion.id}>
-                       <td>{operacion.id}</td>
                        <td>{operacion.fecha}</td>
-                       <td>{operacion.hora}</td>
-                       <td>{operacion.cliente}</td>
                        <td>{operacion.tipoOperacion}</td>
                        <td>{operacion.tipoCambio}</td>
-                       <td>{operacion.montoBitc}</td>
+                       <td>{operacion.montoFinal}</td>
+                       <td>{operacion.estado}</td>
+                       <td>{operacion.cliente}</td>
+
+
                        <td>
                            {
                                <button className="btn btn-link" onClick={() => {
                                 // Llama a la funcion del padre
-                                props.onEditarOperacion(operacion)
+                                props.onEditarOperacion(operacion.id)
                             }} >
                                    Editar
                                </button>
                            }
                        </td>
-                       <td>
-                           {
-                               <div>
-                                   <div class="form-check">
-                                       <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
-                                           <label class="form-check-label" for="flexRadioDefault1">
-                                               Pendiente
-                                           </label>
-                                   </div>
-                                   <div class="form-check">
-                                       <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
-                                           <label class="form-check-label" for="flexRadioDefault2">
-                                               Finalizado
-                                           </label>
-                                   </div>
-                               </div>
-                           }
-                       </td>
+                     
                    </tr>
                })
            }

@@ -1,35 +1,113 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import AdminListaOperaciones from "../../component/admin_listaOperaciones.component"
 import OperacionModal from "../../component/operacionesModal.component"
 
 const Operaciones = () =>
 {
-    const listaOperaciones = 
-    [
-        {id : "15", fecha : "22/04/2020", hora : "22:22", cliente : "billy@hotmail", tipoOperacion : "99882627", tipoCambio: "cambio1", montoBitc:"1678945"},
-        {id : "22", fecha : "10/01/2001", hora : "10:55", cliente : "andra@hotmail", tipoOperacion : "9636313", tipoCambio: "cambio2", montoBitc:"41224"},
-        {id : "35", fecha : "16/02/20222", hora : "11:11", cliente : "hernan@hotmail", tipoOperacion : "81761528 ",  tipoCambio: "cambio3", montoBitc:"1457"}
-    ]
+    const [debeMostarModal, setdebeMostarModal] = useState(false)
+    const [modoFormulario, setModoFormulario] = useState("nuevo")
+    const [listadoOperaciones, setListadoOperaciones] = useState([])
+    const [operacion, setOperacion] = useState(null)
 
-    const [mostrarModal, setMostrarModal] = useState(false)
 
-    const guardarOperacionHandler = (id, fecha, hora, cliente, tipoOperacion,tipoCambio, montoBitc) =>
+    const obtenerOperacionHTTP= async () => {
+        const response = await fetch("/api/operaciones")
+        
+        const data = await response.json()
+        console.log(data)
+        return data
+    }
+    useEffect( async () => {
+        //hacemos una peticion al backend
+        const data = await obtenerOperacionHTTP()
+        setListadoOperaciones(data.operaciones)
+
+    }, [])   
+
+
+    const guardarOperacionHandler = async (fecha, tipoOperacion,tipoCambio, montoFinal,estado,cliente) =>
     {
+        const operacion = {
+            fecha:fecha,
+            tipoOperacion:tipoOperacion,
+            tipoCambio:tipoCambio,
+            montoFinal:montoFinal,
+            estado:estado,
+            cliente:cliente   
+        }
+
+
+        const resp = await fetch("/api/operaciones", {
+            method: "POST",
+            body:JSON.stringify(operacion)
+        } )
+        const data = await resp.json()
+        if(data.msg == ""){
+            setdebeMostarModal(false)
+            const dataOperaciones = await obtenerOperacionHTTP()
+            setListadoOperaciones(dataOperaciones.operaciones)
+            
+        }
        
-        setMostrarModal(false)
     }
-    const onModalClose = () =>
+    const ModalClose = () =>
     {
-        setMostrarModal(false)
+        setdebeMostarModal(false)
     }
 
-    const editarOperacionHandler = (operacion) =>
-    {
-        setMostrarModal(true)
+    const abrirSolicitud = () => {
+        setModoFormulario("nuevo")
+        setdebeMostarModal(true)
     }
+    const editarOperacionHandler = async (id) =>{
+        //abrir el modal cuando se aprete editar
+        const resp = await fetch(`/api/operaciones/${id}` )
+        const data = await resp.json()
+        setOperacion(data.operacion) 
+        setModoFormulario("edicion")
+        setdebeMostarModal(true)
+       
+    }
+    
+    //------------------------------------------------------------------------
+    const  actualizarOperacionHandler  =  async  (id,fecha, tipoOperacion,tipoCambio, montoFinal ,estado,cliente)  =>  {
+        
+        const operacion = {
+            id: id,
+            fecha:fecha,
+            tipoOperacion:tipoOperacion,
+            tipoCambio:tipoCambio,
+            montoFinal:montoFinal ,
+            estado:estado,
+            cliente:cliente
+        }
+
+        // peticion a backend para agregar un nuevo proyecto
+        const  resp  =  await  fetch("/api/operaciones" ,  {
+            method : "PUT" ,
+            body : JSON.stringify(operacion)
+        } )
+        const  data  =  await  resp.json()
+
+        if  ( data.msg  ==  "" )  {
+            setdebeMostarModal(false)
+            const dataOperacion = await obtenerOperacionHTTP()
+            setListadoOperaciones(dataOperacion.operacion)
+        }
+    }
+    //--------------------------------------------------------------------------
+
+
     return <div>
-        <AdminListaOperaciones  operaciones={listaOperaciones} onEditarOperacion={editarOperacionHandler}/>
-        <OperacionModal mostrar={mostrarModal} ocultar={onModalClose}  onGuardarOperacion={guardarOperacionHandler} />
+        <AdminListaOperaciones  operaciones={listadoOperaciones} 
+            onEditarOperacion={editarOperacionHandler}/>
+        <OperacionModal mostrar={debeMostarModal} 
+            modo = {modoFormulario}
+            ocultar={ModalClose}  
+            onGuardarOperacion={guardarOperacionHandler} 
+            onActualizarOperacionHandler = {actualizarOperacionHandler}
+            operacion = {operacion}/>
+        <button className="mt-4"  onClick={abrirSolicitud}>Nuevo </button>    
     </div>
 }
 export default Operaciones
